@@ -1,0 +1,16 @@
+<app-header titulo="Mi Horario"></app-header>
+
+<ion-content>
+    <ion-datetime 
+    [showDefaultTitle]="true"
+    presentation="date"
+    [multiple]="false"
+    (ionChange)="change($event)"
+    [value]="[fecha]" 
+    color="secondary"
+    size="cover">
+    <span slot="title">Seleccione el día</span>
+  </ion-datetime>
+
+  <app-timeline [list]="events"></app-timeline>
+</ion-content>

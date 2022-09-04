@@ -1,0 +1,55 @@
+<ion-content>
+  <!-- <ion-img src="../../assets/img/geometric-background.png" class="bg-login"></ion-img> -->
+  <div class="login-body">
+    <div class="title">
+      <!-- <ion-avatar> -->
+        <ion-img src="../../assets/icon/upse-logo.png"></ion-img>
+      <!-- </ion-avatar> -->
+      <div class="title-name">
+        <ion-title>Por favor, ingrese su cuenta</ion-title>
+        <ion-note *ngIf="error !== null" >{{error}}</ion-note>
+      </div>
+    </div>
+
+    <form [formGroup]="lForm">
+      <ion-item-group>
+        <ion-item>
+          <ion-input type="text" formControlName="email" required placeholder="Email" autofocus></ion-input>
+        </ion-item>
+        <ion-note *ngIf="!this.lForm.controls.email.valid">
+          *Campo requerido</ion-note>
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item *ngIf="!lForm.get('showPassword').value">
+          <ion-input type="password" formControlName="password" required placeholder="Password"></ion-input>
+          <ion-icon name="eye" (click)="lForm.controls.showPassword.setValue(true)"></ion-icon>
+        </ion-item>
+        <ion-item *ngIf="lForm.get('showPassword').value">
+          <ion-input type="text" formControlName="password" required placeholder="Password"></ion-input>
+          <ion-icon name="eye-off" (click)="lForm.controls.showPassword.setValue(false)"></ion-icon>
+        </ion-item>
+        <ion-note *ngIf="!this.lForm.controls.password.valid">
+          *Campo requerido</ion-note>
+      </ion-item-group>
+    </form> 
+
+    <div class="option">
+      <!-- <ion-item-group>
+        <ion-checkbox (ionChange)="onChangeRememberMe('cb')" [(ngModel)]="rememberMe"></ion-checkbox>
+        <ion-label (click)="onChangeRememberMe('clickedOnLabel')">Recuérdame</ion-label>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-checkbox (ionChange)="onChangeRememberMe('cb')" [(ngModel)]="rememberMe"></ion-checkbox>
+        <ion-label (click)="onChangeRememberMe('clickedOnLabel')">Mantener la sesión iniciada</ion-label>
+      </ion-item-group> -->
+      <ion-item-group>
+        <ion-label (click)="onForgotPassword()">Has olvidado tu contraseña</ion-label>
+      </ion-item-group>
+    </div>
+
+    <div class="login-button">
+      <ion-button fill="clear" (click)="onLogin()">Ingresar</ion-button>
+    </div>
+  </div>
+</ion-content>

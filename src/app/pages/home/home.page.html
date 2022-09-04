@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" class="ion-padding-top ion-padding-bottom">
+      <ion-avatar>
+        <img src="../../../assets/icon/upse-logo.png" />
+      </ion-avatar>
+    </ion-buttons>
+    <ion-title>
+      Present Teacher
+    </ion-title>
+
+    <ion-buttons slot="end" class="close">
+      <ion-icon name="exit" slot="icon-only" size="large"></ion-icon>
+      <small>Cerrar Sesion</small>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="container">
+    <div class="welcome">
+      <ion-text><h2>Bienvienid@</h2></ion-text>
+      <ion-text><h1>BASILIO COCHEA MARIO DARIO</h1></ion-text>
+    </div>
+    
+    <div class="wrapper">
+      <ion-grid class="ion-padding">
+        <div class="main-card ion-justify-content-center">
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="6" *ngFor="let item of listMenu" class="ion-no-padding">
+              <ion-card [routerLink]="item.ruta">
+                <ion-card-content>
+                  <ion-img [src]="item.imagen"></ion-img>
+                  <div class="name-menu ion-align-self-center ion-text-wrap">
+                    <strong>{{item.nombre}}</strong>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

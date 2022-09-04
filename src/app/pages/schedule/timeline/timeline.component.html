@@ -1,0 +1,12 @@
+<div class="timeline">
+  <div *ngFor="let item of list" class="timeline-event">
+    <div class="timeline-point-track-container">
+      <div class="timeline-point" [ngClass]="item.status === 'R' ? 'heighligth' : ''"></div>
+      <div class="timeline-track" [ngClass]="item.status === 'R' ? 'heighligth' : ''"></div>
+    </div>
+    <div class="timeline-content">
+      <span>{{item.content}}</span>
+      <span class="timeline-date">{{item.date}}</span>
+    </div>
+  </div>
+</div>

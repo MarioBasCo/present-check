@@ -1,0 +1,65 @@
+.close {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.welcome {
+  width: 100%;
+  height: 15%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.wrapper {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+/* Clase para que las opciones del menú tenga el mismo tamaño */
+.main-card {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  //border: 1px solid red;
+  ion-col {
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+  }
+
+  ion-card {
+    width: 100%;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: var(--ion-color-medium);
+
+    ion-img {
+      height: 100px;
+    }
+
+    .name-menu {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: center;
+
+      strong {
+        font-size: 1.3em;
+        color: var(--ion-color-dark);
+      }
+    }
+  }
+}

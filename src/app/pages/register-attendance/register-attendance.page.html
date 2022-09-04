@@ -1,0 +1,36 @@
+<app-header titulo="Registro de Asistencia"></app-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <div class="wrapper">
+      <div>
+        <ion-button (click)="checkCredential()" size="large" color="warning" mode="ios" expand="block">
+          <ion-icon slot="start" name="finger-print"></ion-icon>
+          <ion-label>Escanear Huella</ion-label>
+        </ion-button>
+      </div>
+
+      <div class="ion-margin-vertical">
+        <ion-row class="ion-justify-content-center ion-text-center">
+          <ion-col class="ion-align-self-center ion-justify-content-end">
+            <div class="hr"></div>
+          </ion-col>
+          <ion-col class="ion-align-self-center ion-margin-horizontal option" size="auto">
+            <strong>O</strong>
+          </ion-col>
+          <ion-col class="ion-align-self-center ion-justify-content-start">
+            <div class="hr"></div>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div>
+        <ion-button (click)="checkCredential()" size="large" color="tertiary" mode="ios" expand="block">
+          <ion-icon slot="end" name="qr-code-outline"></ion-icon>
+          <ion-label>Escanear Codigo</ion-label>
+        </ion-button>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
