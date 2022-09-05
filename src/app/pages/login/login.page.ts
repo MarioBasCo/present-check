@@ -1,6 +1,10 @@
+import { LstorageService } from './../../services/lstorage.service';
+import { UtilService } from './../../services/util.service';
+import { AlertService } from './../../services/alert.service';
+import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,72 +13,60 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  public lForm: FormGroup;
-  public rememberMe: boolean;
-  public returnUrl;
-  error: any;
-  loading: boolean = false;
+  lForm: FormGroup;
+  rememberMe: boolean;
+  showPassword = false;
+  passwordToggleIcon = 'eye-off-outline';
 
   constructor(
     public lFormBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
+    private serLogin: LoginService,
+    private serAlert: AlertService,
+    private serUtil: UtilService,
+    private serStorage: LstorageService
   ) {
-    this.lForm = lFormBuilder.group({
-      email: [
-        atob(localStorage.getItem("val1")) !== "ée"
-          ? atob(localStorage.getItem("val1"))
-          : "",
-        Validators.required,
-      ],
-      password: [
-        atob(localStorage.getItem("val2")) !== "ée"
-          ? atob(localStorage.getItem("val2"))
-          : "",
-        Validators.required,
-      ],
-      showPassword: false,
+    this.buildForm()
+  }
+
+  buildForm() {
+    this.lForm = this.lFormBuilder.group({
+      correo: ['', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      clave: ['', [Validators.required]],
     });
   }
 
 
   ngOnInit() {
-    console.log(atob(localStorage.getItem("val3")));
-    console.log(this.lForm);
-    const tempVal3 =
-      atob(localStorage.getItem("val3")) !== "ée"
-        ? atob(localStorage.getItem("val3"))
-        : "";
-    this.rememberMe = Boolean(tempVal3);
-    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
+
   }
 
-
-  onChangeRememberMe(token) {
-    this.rememberMe =
-      token === "clickedOnLabel" ? !this.rememberMe : this.rememberMe;
-  }
-
-
-  checkRememberMe() {
-    localStorage.setItem("val3", window.btoa(this.rememberMe.toString()));
-    if (this.rememberMe.toString() === "true") {
-      localStorage.setItem("val1", window.btoa(this.lForm.get("email").value));
-      localStorage.setItem(
-        "val2",
-        window.btoa(this.lForm.get("password").value)
-      );
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+    if (this.passwordToggleIcon == 'eye-off-outline') {
+      this.passwordToggleIcon = 'eye-outline';
     } else {
-      localStorage.removeItem("val1");
-      localStorage.removeItem("val2");
+      this.passwordToggleIcon = 'eye-off-outline';
     }
   }
 
-
-  async onLogin() {
-    
+  ingresar() {
+    console.log(JSON.stringify(this.lForm.value));
+    this.serLogin.fun_login(this.serUtil.objectToFormData(this.lForm.value)).subscribe(res => {
+      if (res.status == true) {
+        this.serStorage.set('user', res.data);
+        this.limpiarForm();
+        this.router.navigateByUrl('/home', { replaceUrl: true });
+      } else {
+        this.serAlert.showToast('Credenciales incorrectas', 'danger');
+      }
+    });
   }
 
+  limpiarForm(){
+    this.buildForm();
+    this.lForm.reset(this.lForm.value);
+  }
 
   onForgotPassword() {
 

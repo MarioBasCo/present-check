@@ -1,4 +1,7 @@
+import { Router } from '@angular/router';
+import { LstorageService } from './../../services/lstorage.service';
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  listMenu: any [] = [
+  listMenu: any[] = [
     {
       nombre: 'Registrar Asistencia',
       ruta: '/register-attendance',
@@ -27,12 +30,48 @@ export class HomePage {
       ruta: '/profile',
       imagen: 'assets/icon/students.png'
     },
-   /*  {
-      nombre: 'Administrar Huellas',
-      ruta: '/manage-fingerprints',
-      imagen: 'assets/icon/setting.png'
-    }  */
+    /*  {
+       nombre: 'Administrar Huellas',
+       ruta: '/manage-fingerprints',
+       imagen: 'assets/icon/setting.png'
+     }  */
   ];
 
-  constructor() { }
+  nombre_usuario: string = '';
+
+  constructor(
+    private serStorage: LstorageService, 
+    private router: Router,
+    private alertCtrl: AlertController) {
+    const { apellidos, nombres } = this.serStorage.get('user')
+    this.nombre_usuario = apellidos + " " + nombres;
+  }
+
+  async cerrarSesion(){
+    const alert = await this.alertCtrl.create({
+      header: 'Cerrar Sesión',
+      message: 'Desea <strong>cerrar sesión</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Aceptar',
+          id: 'confirm-button',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.serStorage.clear();
+            this.router.navigateByUrl('/login', { replaceUrl: true });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }

@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  webservice: 'https://marcaciones-sexto.000webhostapp.com'
 };

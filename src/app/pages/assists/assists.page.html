@@ -1,4 +1,20 @@
 <app-header titulo="Mis Asistencias"></app-header>
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-select interface="action-sheet" placeholder="Seleccione una materia" cancelText="Cancelar"
+      (ionChange)="cargarData($event)">
+      <ion-select-option [value]="item.id_materia" *ngFor="let item of data">{{item.nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
 
+  <ion-card *ngFor="let item of asistencias">
+    <ion-card-content>
+      <ion-text color="success"><b>Fecha: </b>{{item.fecha}}</ion-text><br>
+      <ion-text color="success"><b>Hora: </b>{{item.hora}}</ion-text><br>
+      <ion-text color="secondary"><b>Latitud: </b>{{item.latitud}}</ion-text><br>
+      <ion-text color="secondary"><b>Longitud: </b>{{item.longitud}}</ion-text><br>
+      <ion-text color="primary"><b>Dispositivo: </b>{{item.dispositivo}}</ion-text><br>
+      <ion-text color="primary"><b>Dirección IP: </b>{{item.direccion_ip}}</ion-text><br>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

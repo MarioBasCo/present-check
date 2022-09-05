@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.stip.fingerprint.app;
 
 import com.getcapacitor.BridgeActivity;
 

@@ -5,8 +5,10 @@
       <div class="timeline-track" [ngClass]="item.status === 'R' ? 'heighligth' : ''"></div>
     </div>
     <div class="timeline-content">
-      <span>{{item.content}}</span>
-      <span class="timeline-date">{{item.date}}</span>
+      <span><strong>{{item.materia}}</strong></span><br>
+      <span class="timeline-date">{{item.inicio}} - {{item.fin}}</span><br>
+      <span><small>{{item.aula}}</small></span><br>
+      <span><small>{{item.docente}}</small></span><br><br>
     </div>
   </div>
 </div>

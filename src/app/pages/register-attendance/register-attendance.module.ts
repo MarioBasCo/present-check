@@ -1,6 +1,6 @@
 import { HeaderModule } from './../../componets/header/header.module';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -17,6 +17,7 @@ import { RegisterAttendancePage } from './register-attendance.page';
     HeaderModule,
     RegisterAttendancePageRoutingModule
   ],
-  declarations: [RegisterAttendancePage]
+  declarations: [RegisterAttendancePage],
+  providers: [DatePipe]
 })
 export class RegisterAttendancePageModule {}
